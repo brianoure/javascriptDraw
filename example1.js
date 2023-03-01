@@ -13,15 +13,29 @@ function docId(id){return document.getElementById(id);}
 function color_id(id,clr){docId(id).style.background=clr;}
 
 function drawline(x1,y1,x2,y2,clr){
+    let m=0;
+    let dy=y2-y1;
+    let dx=x2-x1;
+    let rslt=[];
     if((x1==x2)&& (y1==y2)){   }/*dot*/
-    if((x1==x2)&& (y2>y1)){    }/*pos inf grad*/
-    if((x2>x1) && (y2>y1)){    }/*pos grad*/
+    
+    if((x1==x2)&& (y2>y1) ){
+      for(let g=y1;g<=y2;g++){ rslt.push([x1,g,clr]); }/*for*/
+    }/*pos inf grad*/
+    
+    if((x1<x2) && (y1<y2) ){
+      m=dy/dx;
+      for(let y=y1;y<=y2;y++){
+         for(let x=x1;x<=x2;x++){ rslt.push([x,y,clr]); }/*for*/
+      }/*for*/ 
+    }/*pos grad*/
+    
     if((x1<x2) && (y1==y2)){   }/*zero grad*/
-    if((x1<x2) && (y1>y2)){    }/*neg grad*/
-    if((x1==x2)&& (y1>y2)){    }/*neg inf grad*/
-    if((x1>x2) && (y1>y2)){    }/*another neg grad*/
+    if((x1<x2) && (y1>y2) ){ m=dy/dx;   }/*neg grad*/
+    if((x1==x2)&& (y1>y2) ){    }/*neg inf grad*/
+    if((x1>x2) && (y1>y2) ){ m=dy/dx;   }/*another neg grad*/
     if((x1>x2) && (y1==y2)){   }/*another zero grad*/
-    if((x1>x2) && (y2>y1)){    }/*another neg grad*/
+    if((x1>x2) && (y2>y1) ){  m=dy/dx;  }/*another neg grad*/
     
 }/*drawline*/
 

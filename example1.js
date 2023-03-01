@@ -26,7 +26,14 @@ function drawline(x1,y1,x2,y2,clr){
     if((x1<x2) && (y1<y2) ){
       m=dy/dx;
       for(let y=y1;y<=y2;y++){
-         for(let x=x1;x<=x2;x++){ rslt.push([x,y,clr]); }/*for*/
+         for(let x=x1;x<=x2;x++){
+             var northgrad;
+             var
+             var bestgrad=0;
+             
+             if(bestgrad==0){rslt.push([x,y,clr]); }/*for*/}/*if*/
+             if(bestgrad==1){rslt.push([x,y,clr]); }/*for*/}/*if*/
+             if(bestgrad==2){rslt.push([x,y,clr]); }/*for*/}/*if*/
       }/*for*/ 
     }/*pos grad*/
     

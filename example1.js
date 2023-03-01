@@ -12,6 +12,19 @@ function doc(x){document.write(x);}
 function docId(id){return document.getElementById(id);}
 function color_id(id,clr){docId(id).style.background=clr;}
 
+function drawline(x1,y1,x2,y2,clr){
+    if((x1==x2)&& (y1==y2)){   }/*dot*/
+    if((x1==x2)&& (y2>y1)){    }/*pos inf grad*/
+    if((x2>x1) && (y2>y1)){    }/*pos grad*/
+    if((x1<x2) && (y1==y2)){   }/*zero grad*/
+    if((x1<x2) && (y1>y2)){    }/*neg grad*/
+    if((x1==x2)&& (y1>y2)){    }/*neg inf grad*/
+    if((x1>x2) && (y1>y2)){    }/*another neg grad*/
+    if((x1>x2) && (y1==y2)){   }/*another zero grad*/
+    if((x1>x2) && (y2>y1)){    }/*another neg grad*/
+    
+}/*drawline*/
+
 
 //initialize
 for(let pixel=0;pixel<(drawingheight*drawingwidth);pixel++){//for

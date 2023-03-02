@@ -13,37 +13,18 @@ function docId(id){return document.getElementById(id);}
 function color_id(id,clr){docId(id).style.background=clr;}
 
 function drawline(x1,y1,x2,y2,clr){
-    let m=0;
-    let dy=y2-y1;
-    let dx=x2-x1;
     let rslt=[];
-    if((x1==x2)&& (y1==y2)){   }/*dot*/
-    
-    if((x1==x2)&& (y2>y1) ){
-      for(let g=y1;g<=y2;g++){ rslt.push([x1,g,clr]); }/*for*/
-    }/*pos inf grad*/
-    
-    if((x1<x2) && (y1<y2) ){
-      m=dy/dx;
-      for(let y=y1;y<=y2;y++){
-         for(let x=x1;x<=x2;x++){
-             var northgrad;
-             var
-             var bestgrad=0;
-             
-             if(bestgrad==0){rslt.push([x,y,clr]); }/*for*/}/*if*/
-             if(bestgrad==1){rslt.push([x,y,clr]); }/*for*/}/*if*/
-             if(bestgrad==2){rslt.push([x,y,clr]); }/*for*/}/*if*/
-      }/*for*/ 
-    }/*pos grad*/
-    
-    if((x1<x2) && (y1==y2)){   }/*zero grad*/
-    if((x1<x2) && (y1>y2) ){ m=dy/dx;   }/*neg grad*/
-    if((x1==x2)&& (y1>y2) ){    }/*neg inf grad*/
-    if((x1>x2) && (y1>y2) ){ m=dy/dx;   }/*another neg grad*/
-    if((x1>x2) && (y1==y2)){   }/*another zero grad*/
-    if((x1>x2) && (y2>y1) ){  m=dy/dx;  }/*another neg grad*/
-    
+    if(x2==x1){
+      if(y2>y1){for(let y=y1;y<=y2;y++){rslt.push([x1,y,clr]);}/*for*/}/*if*/
+      if(y1>y2){for(let y=y2;y<=y1;y++){rslt.push([x1,y,clr]);}/*for*/}/*if*/
+      return rslt;
+    }/*infinite gradient*/
+    else{
+      let m=(y2-y1)/(x2-x1);/*gradient*/let c=(y2-(m*x2));/*constant*/
+      if(x2>x1){ for(let x=x1;x<=x2;x++){ rslt.push( x,((m*x)+c),clr ); }/*for*/} /*if*/
+      if(x1>x2){ for(let x=x2;x<=x1;x++){ rslt.push( x,((m*x)+c),clr ); }/*for*/} /*if*/
+      return rslt;
+    }/*else*/
 }/*drawline*/
 
 

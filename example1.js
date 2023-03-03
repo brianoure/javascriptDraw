@@ -12,6 +12,10 @@ function docId(id){return document.getElementById(id);}
 function color_id(id,clr){docId(id).style.background=clr;}
 
 function drawline(x1,y1,x2,y2,clr){
+    if(x1>dw){}
+    if(x2>dw){}
+    if(y1>dh){}
+    if(y2>dh){}
     let rslt=[];
     if(x2==x1){/*infinite gradient*/
       if(y2>y1){for(let y=y1;y<=y2;y++){rslt.push([x1,y,clr]);}/*for*/}/*if*/

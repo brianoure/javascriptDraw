@@ -11,23 +11,24 @@ function doc(x){document.write(x);}
 function docId(id){return document.getElementById(id);}
 function color_id(id,clr){docId(id).style.background=clr;}
 
-function drawline(x1,y1,x2,y2,clr){
-    if(x1>dw){}
-    if(x2>dw){}
-    if(y1>dh){}
-    if(y2>dh){}
+function drawline(x1,y1,x2,y2,clr){/*drawline*/
+    /*limit drawing within space*/
+    if(x1>dw){x1=drawingheight;}
+    if(x2>dw){x2=dw;}
+    if(y1>dh){y1=dh;}
+    if(y2>dh){y2=dh;}
     let rslt=[];
     if(x2==x1){/*infinite gradient*/
-      if(y2>y1){for(let y=y1;y<=y2;y++){rslt.push([x1,y,clr]);}/*for*/}/*if*/
-      if(y1>y2){for(let y=y2;y<=y1;y++){rslt.push([x1,y,clr]);}/*for*/}/*if*/
-      return rslt;
+       if(y2>y1){ for(let y=y1;y<=y2;y++){rslt.push([x1,y,clr]);}/*for*/ }/*if*/
+       if(y1>y2){ for(let y=y2;y<=y1;y++){  color_raster[(x1*dw)+y]=[x1,y,clr]; }/*for*/ }/*if*/
+       return rslt;
     }/*infinite gradient*/
     else{
-      let m=(y2-y1)/(x2-x1);/*gradient*/let c=(y2-(m*x2));/*constant*/
-      let my_y=0;my_y=Math.round(((m*x)+c));/*integers*/
-      if(x2>x1){ for(let x=x1;x<=x2;x++){ rslt.push( x,my_y,clr ); }/*for*/} /*if*/
-      if(x1>x2){ for(let x=x2;x<=x1;x++){ rslt.push( x,my_y,clr ); }/*for*/} /*if*/
-      return rslt;
+        let m=(y2-y1)/(x2-x1);/*gradient*/let c=(y2-(m*x2));/*constant*/
+        let my_y=0;my_y=Math.round(((m*x)+c));/*integers*/
+        if(x2>x1){ for(let x=x1;x<=x2;x++){ rslt.push( x,my_y,clr ); }/*for*/} /*if*/
+        if(x1>x2){ for(let x=x2;x<=x1;x++){ rslt.push( x,my_y,clr ); }/*for*/} /*if*/
+        return rslt;
     }/*else*/
 }/*drawline*/
 

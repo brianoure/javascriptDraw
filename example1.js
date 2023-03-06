@@ -43,10 +43,10 @@ function drawline(x1,y1,x2,y2,clr){/*drawline*/
       return 0;/*I ain't doin' jack*/
     }/*no draw...outside canvas*/
     if(x2>x1){ 
-      for(let x=x1;x<=x2;x++){ let my_y=Math.round((m*x)+c);color_raster[(dw*my_y)+x] = [x,my_y,clr]; }/*for*/
+      for(let x=x1;x<=x2;x++){ let my_y=Math.round((m*x)+c); color_raster[(dw*my_y)+x]=[x,my_y,clr]; }/*for*/
     }/*if*/
     if(x1>x2){
-      for(let x=x2;x<=x1;x++){ let my_y=Math.round((m*x)+c);color_raster[(dw*my_y)+x] = [x,my_y,clr]; }/*for*/
+      for(let x=x2;x<=x1;x++){ let my_y=Math.round((m*x)+c); color_raster[(dw*my_y)+x]=[x,my_y,clr]; }/*for*/
     }/*if*/
     return 0;
 }/*drawline*/

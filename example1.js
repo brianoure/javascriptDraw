@@ -51,23 +51,52 @@ function drawline(x1,y1,x2,y2,clr){/*drawline*/
     return 0;
 }/*drawline*/
 
+function line(x1,y1,x2,y2,clr){
+  function lineftn(m,x,c){return Math.round((m*x)+c);}/*lineftn*/
+  let myplot = [];
+  let m = 0;
+  let c = 0;
+  if( ((x2-x1)!=0) && ((y2-y1)!=0) ) {m=(y2-y1)/(x2-x1);}/*normal gradient*/
+  if( (x2-x1)==0  ) {
+      if(y1<y2){for(let y=y1;y<=y2;y++){myplot.push([x2,y,clr]);}/*for*/}/*if*/
+      if(y1>y2){for(let y=y2;y<=y1;y++){myplot.push([x2,y,clr]);}/*for*/}/*if*/
+      return myplot;
+  }/*error control/
+  if( (y2-y1)==0  ) {
+      if(x1<x2){for(let x=x1;x<=x2;x++){myplot.push([x,y2,clr]);}/*for*/}/*if*/
+      if(x1>x2){for(let x=x2;x<=x1;x++){myplot.push([x,y2,clr]);}/*for*/}/*if*/
+      return myplot;
+  }/*error control*/
+  c = y1-(m*x1);
+  if(x1<x2){
+    for(let x=x1;x<=x2;x++){ myplot.push([x,lineftn(m,x,c),clr]); }/*for*/
+  }/*L to R*/
+  if(x1>x2){
+    for(let x=x2;x<=x1;x++){ myplot.push([x,lineftn(m,x,c),clr]); }/*for*/
+  }/*R to L*/
+  return myplot;
+}/*line*/
+
 function circle(ctrX,ctrY,radius,clr){
   let plot_points=[];
-  function getDY(myx,myradius){return Math.round(Math.sqrt((myradius*myradius)-((ctrX-myx)*(ctrX-myx)));}/*getY*/
+  function getDY(myx){return Math.round(Math.sqrt((radius*radius)-((ctrX-myx)*(ctrX-myx)));}/*getY*/
   for(let x=ctrX;x<=(ctrX+radius);x++){/*left to right*/
-      let dy=getDY(x,radius);
+      let dy=getDY(x);
       plot_points.push([x,ctrY+dy,clr]);
       plot_points.push([x,ctrY-dy,clr]);
   }/*for*/
   for(let x=(ctrX-1);x>=(ctrX-radius);x--){/*right to left*/
-      let dy=getDY(x,radius);
+      let dy=getDY(x);
       plot_points.push([x,ctrY+dy,clr]);
       plot_points.push([x,ctrY-dy,clr]);
   }/*for*/
   return plot_points;
 }/*draw_circle*/
 
-function show_color_raster(posX,posY,clr_raster){
+function fill_circle(ctrX,ctrY,radius,clr){
+    let myplot=[];
+    for(let r=0;r<=radius;r++){myplot.push (circle(ctrX,ctrY,radius,clr) );}/*for*/
+    return myplot;
 }/*show_color_raster*/
 
 doc("<table id='mycanvas'>");

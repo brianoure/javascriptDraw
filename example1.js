@@ -20,8 +20,8 @@ function drawline(x1,y1,x2,y2,clr){/*drawline*/
     let m = 0;
     let c = 0;
     if( ((x2-x1)!=0) && ((y2-y1)!=0) ) {m=(y2-y1)/(x2-x1);}
-    if( (x2-x1)==0  ) {m = 1000000; }/*error control*/
-    if( (y2-y1)==0  ) {m = 0.000001;}/*error control*/
+    if( (x2-x1)==0  ) {m = 1000000000000; }/*error control, safe integer number is 2^53-1*/
+    if( (y2-y1)==0  ) {m = 0.0000000001;}/*error control*/
     c = y1-(m*x1);
     if(x1<x2){/*left to right*/
       if(x2>dw){x2=dw;y2=(m*x2)+c;}

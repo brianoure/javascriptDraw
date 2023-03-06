@@ -51,8 +51,27 @@ function drawline(x1,y1,x2,y2,clr){/*drawline*/
     return 0;
 }/*drawline*/
 
+function circle(ctrX,ctrY,radius,clr){
+  let plot_points=[];
+  function getDY(myx,myradius){return Math.round(Math.sqrt((myradius*myradius)-((ctrX-myx)*(ctrX-myx)));}/*getY*/
+  for(let x=ctrX;x<=(ctrX+radius);x++){/*left to right*/
+      let dy=getDY(x,radius);
+      plot_points.push([x,ctrY+dy,clr]);
+      plot_points.push([x,ctrY-dy,clr]);
+  }/*for*/
+  for(let x=(ctrX-1);x>=(ctrX-radius);x--){/*right to left*/
+      let dy=getDY(x,radius);
+      plot_points.push([x,ctrY+dy,clr]);
+      plot_points.push([x,ctrY-dy,clr]);
+  }/*for*/
+  return plot_points;
+}/*draw_circle*/
+
+function show_color_raster(posX,posY,clr_raster){
+}/*show_color_raster*/
+
 doc("<table id='mycanvas'>");
-for(let r=(drawingheight-1);r>=0;r--){/*origin is at bottom left, you know the normal way*/
+for(let r=(drawingheight-1);r>=0;r--){/*origin is at bottom left,the normal way*/
    doc("<tr>");
    for(let c=0;c<=(drawingwidth-1);c++){//for
        let idstring = "r"+r+"c"+c;
